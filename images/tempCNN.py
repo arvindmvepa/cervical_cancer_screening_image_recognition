@@ -23,7 +23,7 @@ from tflearn.layers.conv import conv_2d, max_pool_2d
 from tflearn.layers.normalization import local_response_normalization
 from tflearn.layers.estimator import regression
 
-dataset_file = r'$HOME/cs249_final_project/image_files/train'
+dataset_file = r'/home/ubuntu/cs249_final_project/image_files/train'
 
 # Build a HDF5 dataset (only required once)
 from tflearn.data_utils import build_hdf5_image_dataset
