@@ -26,7 +26,8 @@ label = np.array(label)
 
 
 #TODO different kernel
-clf = SVC(kernel='precomputed')
+#clf = SVC(kernel='precomputed')
+clf = SVC()
 clf.fit(data, label)
 
 # 5-fold cross validation
