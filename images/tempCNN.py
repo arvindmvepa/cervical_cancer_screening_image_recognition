@@ -23,10 +23,21 @@ from tflearn.layers.conv import conv_2d, max_pool_2d
 from tflearn.layers.normalization import local_response_normalization
 from tflearn.layers.estimator import regression
 
-dataset_file = r'/home/ubuntu/cs249_final_project/image_files/train'
+dataset_file = r'/home/ubuntu/cs249_final_project/image_files/train_test'
 
-from tflearn.data_utils import image_preloader
-X,Y = image_preloader(dataset_file, image_shape=(300, 300), mode='folder', categorical_labels=True, normalize=True)
+from tflearn.data_utils import build_hdf5_image_dataset
+build_hdf5_image_dataset(dataset_file, image_shape=(300, 300), mode='folder', output_path='dataset.h5', categorical_labels=True, normalize=True)
+
+# Load HDF5 dataset
+import h5py
+h5f = h5py.File('dataset.h5', 'r')
+X = h5f['X']
+Y = h5f['Y']
+
+
+#from tflearn.data_utils import image_preloader
+#X,Y = image_preloader(dataset_file, image_shape=(300, 300), mode='folder', categorical_labels=True, normalize=True)
+#print(X.__getitem__(0))
 
 network = input_data(shape=[None, 300, 300, 3])
 network = conv_2d(network, 96, 11, strides=4, activation='relu')
