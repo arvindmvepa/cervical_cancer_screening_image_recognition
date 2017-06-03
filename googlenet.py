@@ -30,7 +30,11 @@ h5f = h5py.File('dataset.h5', 'r')
 X = h5f['X']
 Y = h5f['Y']
 
-network = input_data(shape=[None, 300, 300, 3])
+img_aug = tflearn.ImageAugmentation()
+img_aug.add_random_flip_leftright()
+img_aug.add_random_90degrees_rotation (rotations=[0, 2])
+
+network = input_data(shape=[None, 300, 300, 3], data_augmentation=img_aug)
 conv1_7_7 = conv_2d(network, 64, 7, strides=2, activation='relu', name = 'conv1_7_7_s2')
 pool1_3_3 = max_pool_2d(conv1_7_7, 3,strides=2)
 pool1_3_3 = local_response_normalization(pool1_3_3)
@@ -147,6 +151,7 @@ network = regression(loss, optimizer='momentum',
                      learning_rate=0.001)
 model = tflearn.DNN(network, checkpoint_path='model_googlenet',
                     max_checkpoints=1, tensorboard_verbose=2)
-model.fit(X, Y, n_epoch=1000, validation_set=0.1, shuffle=None,
+model.fit(X, Y, n_epoch=500, validation_set=0.1, shuffle=True,
           show_metric=True, batch_size=64, snapshot_step=200,
-          snapshot_epoch=False, run_id='googlenet_cs249')
+          snapshot_epoch=False, run_id='googlenet_cs249_aug')
+model.save('googlenet_aug')
