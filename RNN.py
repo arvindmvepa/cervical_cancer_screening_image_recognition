@@ -23,11 +23,17 @@ from tflearn.layers.conv import conv_2d, max_pool_2d
 from tflearn.layers.normalization import local_response_normalization
 from tflearn.layers.estimator import regression
 
-dataset_file = r'/home/ubuntu/CS249_cervex_cancer/train'
+dataset_file = r'/home/ubuntu/cs249_final_project/image_files/train'
 
-from tflearn.data_utils import image_preloader
-X,Y = image_preloader(dataset_file, image_shape=(100, 100), mode='folder', categorical_labels=True, normalize=True)
-net = tflearn.input_data(shape=[None, 100, 100, 3])
+from tflearn.data_utils import build_hdf5_image_dataset
+build_hdf5_image_dataset(dataset_file, image_shape=(300, 300), mode='folder', output_path='dataset.h5', categorical_labels=True, normalize=True)
+
+import h5py
+h5f = h5py.File('dataset.h5', 'r')
+X = h5f['X']
+Y = h5f['Y']
+
+net = tflearn.input_data(shape=[None, 300, 300, 3])
 net = tflearn.conv_2d(net, 64, 3, activation='relu', bias=False)
 # Residual blocks
 net = tflearn.residual_bottleneck(net, 3, 16, 64)
@@ -47,6 +53,6 @@ net = tflearn.regression(net, optimizer='momentum',
 model = tflearn.DNN(net, checkpoint_path='RNN',
                     max_checkpoints=10, tensorboard_verbose=0)
 
-model.fit(X, Y, n_epoch=1000, validation_set=0.1, shuffle=True,
+model.fit(X, Y, n_epoch=1000, validation_set=0.1, shuffle=None,
           show_metric=True, batch_size=64, snapshot_step=50,
           snapshot_epoch=False, run_id='CPU')
