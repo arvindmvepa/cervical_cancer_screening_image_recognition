@@ -37,7 +37,7 @@ img_aug.add_random_90degrees_rotation (rotations=[0, 2])
 img_prep = tflearn.ImagePreprocessing()
 img_prep.add_zca_whitening()
 
-network = input_data(shape=[None, 300, 300, 3], data_preprocessing=img_prep, data_augmentation=img_aug)
+network = input_data(shape=[None, 300, 300, 3], data_preprocessing=img_prep)
 conv1_7_7 = conv_2d(network, 64, 7, strides=2, activation='relu', name = 'conv1_7_7_s2')
 pool1_3_3 = max_pool_2d(conv1_7_7, 3,strides=2)
 pool1_3_3 = local_response_normalization(pool1_3_3)

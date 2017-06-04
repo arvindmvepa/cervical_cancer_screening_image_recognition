@@ -32,7 +32,7 @@ img_aug = tflearn.ImageAugmentation()
 img_aug.add_random_flip_leftright()
 img_aug.add_random_90degrees_rotation (rotations=[0, 2])
 
-network = input_data(shape=[None, 300, 300, 3], data_augmentation=img_aug)
+network = input_data(shape=[None, 300, 300, 3])
 conv1_7_7 = conv_2d(network, 64, 5, strides=2, activation='relu', name = 'conv1_7_7_s2')
 pool1_3_3 = max_pool_2d(conv1_7_7, 3,strides=2)
 pool1_3_3 = local_response_normalization(pool1_3_3)
