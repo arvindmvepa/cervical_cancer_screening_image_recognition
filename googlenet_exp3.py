@@ -41,7 +41,7 @@ pool1_3_3 = local_response_normalization(pool1_3_3)
 
 conv2_3_3_reduce = conv_2d(pool1_3_3, 64,1, activation='relu',name = 'conv2_3_3_reduce')
 
-conv2_3_3 = conv_2d(conv2_3_3_reduce, 20,3, activation='relu', name='conv2_3_3')
+conv2_3_3 = conv_2d(conv2_3_3_reduce, 144,3, activation='relu', name='conv2_3_3')
 conv2_3_3 = local_response_normalization(conv2_3_3)
 pool2_3_3 = max_pool_2d(conv2_3_3, kernel_size=3, strides=2, name='pool2_3_3_s2')
 
