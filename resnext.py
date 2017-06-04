@@ -31,18 +31,18 @@ X = h5f['X']
 Y = h5f['Y']
 
 # Real-time data preprocessing
-img_prep = tflearn.ImagePreprocessing()
-img_prep.add_featurewise_zero_center(per_channel=True)
+#img_prep = tflearn.ImagePreprocessing()
+#img_prep.add_featurewise_zero_center(per_channel=True)
 
 # Real-time data augmentation
-img_aug = tflearn.ImageAugmentation()
-img_aug.add_random_flip_leftright()
-img_aug.add_random_crop([32, 32], padding=4)
+#img_aug = tflearn.ImageAugmentation()
+#img_aug.add_random_flip_leftright()
+#img_aug.add_random_crop([100, 100], padding=4)
+
+n=5
 
 # Building Residual Network
-net = tflearn.input_data(shape=[None, 100, 100, 3],
-                         data_preprocessing=img_prep,
-                         data_augmentation=img_aug)
+net = tflearn.input_data(shape=[None, 100, 100, 3])
 net = tflearn.conv_2d(net, 16, 3, regularizer='L2', weight_decay=0.0001)
 net = tflearn.resnext_block(net, n, 16, 32)
 net = tflearn.resnext_block(net, 1, 32, 32, downsample=True)
