@@ -149,7 +149,7 @@ network = regression(loss, optimizer='momentum',
                      learning_rate=0.001)
 model = tflearn.DNN(network, checkpoint_path='model_googlenet',
                     max_checkpoints=1, tensorboard_verbose=2)
-model.fit(X, Y, n_epoch=1000, validation_set=0.25, shuffle=True,
+model.fit(X, Y, n_epoch=1000, validation_set=1/3, shuffle=True,
           show_metric=True, batch_size=64, snapshot_step=200,
           snapshot_epoch=False, run_id='googlenet_cs249_aug')
 model.save('googlenet_aug')
