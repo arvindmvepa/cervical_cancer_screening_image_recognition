@@ -20,13 +20,17 @@ from tflearn.layers.estimator import regression
 
 dataset = r'/home/ubuntu/cs249_final_project/train'
 
-from tflearn.data_utils import build_hdf5_image_dataset
+#from tflearn.data_utils import build_hdf5_image_dataset
 #build_hdf5_image_dataset(dataset, image_shape=(300, 300), mode='folder', output_path='dataset.h5', categorical_labels=True, normalize=True)
 
-import h5py
-h5f = h5py.File('dataset.h5', 'r')
-X = h5f['X']
-Y = h5f['Y']
+#import h5py
+#h5f = h5py.File('dataset.h5', 'r')
+#X = h5f['X']
+#Y = h5f['Y']
+
+from tflearn.data_utils import image_preloader
+X,Y = image_preloader(dataset, image_shape=(300, 300), mode='folder', categorical_labels=True, normalize=True)
+
 
 #img_aug = tflearn.ImageAugmentation()
 #img_aug.add_random_flip_leftright()
