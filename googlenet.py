@@ -18,10 +18,10 @@ from tflearn.layers.normalization import local_response_normalization
 from tflearn.layers.merge_ops import merge
 from tflearn.layers.estimator import regression
 
-dataset = r'/home/ubuntu/cs249_final_project/train'
+dataset = r'/home/ubuntu/cs249_final_project/image_files/train'
 
 from tflearn.data_utils import build_hdf5_image_dataset
-#build_hdf5_image_dataset(dataset, image_shape=(300, 300), mode='folder', output_path='dataset.h5', categorical_labels=True, normalize=True)
+build_hdf5_image_dataset(dataset, image_shape=(300, 300), mode='folder', output_path='dataset.h5', categorical_labels=True, normalize=True)
 
 import h5py
 h5f = h5py.File('dataset.h5', 'r')
@@ -147,9 +147,8 @@ loss = fully_connected(pool5_7_7, 3,activation='softmax')
 network = regression(loss, optimizer='momentum',
                      loss='categorical_crossentropy',
                      learning_rate=0.001)
-model = tflearn.DNN(network, checkpoint_path='model_googlenet',
-                    max_checkpoints=1, tensorboard_verbose=2)
+model = tflearn.DNN(network, checkpoint_path='model_googlenet')
 model.fit(X, Y, n_epoch=1000, validation_set=0.1, shuffle=True,
-          show_metric=True, batch_size=64, snapshot_step=200,
+          show_metric=True, batch_size=64, snapshot_step=100,
           snapshot_epoch=False, run_id='googlenet_cs249_aug')
 model.save('googlenet_aug')
