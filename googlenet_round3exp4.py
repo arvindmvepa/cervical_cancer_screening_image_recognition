@@ -21,7 +21,7 @@ from tflearn.layers.estimator import regression
 dataset = r'/home/ubuntu/cs249_final_project/train'
 
 from tflearn.data_utils import build_hdf5_image_dataset
-#build_hdf5_image_dataset(dataset, image_shape=(300, 300), mode='folder', output_path='dataset.h5', categorical_labels=True, normalize=True)
+#build_hdf5_image_dataset(dataset, image_shape=(224, 224), mode='folder', output_path='dataset.h5', categorical_labels=True, normalize=True)
 
 import h5py
 h5f = h5py.File('dataset.h5', 'r')
