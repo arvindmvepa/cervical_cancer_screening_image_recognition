@@ -34,10 +34,10 @@ Y = h5f['Y']
 
 network = input_data(shape=[None, 300, 300, 3])
 conv1_7_7 = conv_2d(network, 64, 7, strides=2, activation='relu', name = 'conv1_7_7_s2')
-pool1_3_3 = max_pool_2d(conv1_7_7, 3,strides=2)
+pool1_3_3 = max_pool_2d(conv1_7_7, 2,strides=2)
 pool1_3_3 = local_response_normalization(pool1_3_3)
 conv2_3_3_reduce = conv_2d(pool1_3_3, 64,1, activation='relu',name = 'conv2_3_3_reduce')
-conv2_3_3 = conv_2d(conv2_3_3_reduce, 192,3, activation='relu', name='conv2_3_3')
+conv2_3_3 = conv_2d(conv2_3_3_reduce, 20,3, activation='relu', name='conv2_3_3')
 conv2_3_3 = local_response_normalization(conv2_3_3)
 pool2_3_3 = max_pool_2d(conv2_3_3, kernel_size=3, strides=2, name='pool2_3_3_s2')
 inception_3a_1_1 = conv_2d(pool2_3_3, 64, 1, activation='relu', name='inception_3a_1_1')
@@ -162,7 +162,7 @@ for filename in os.listdir(test_path):
     f.write(os.path.join(test_path, filename) + ' ' + os.path.splitext(filename)[0] + '\n')
 f.close()
 
-#build_hdf5_image_dataset('test.txt', image_shape=(300, 300), mode='file', categorical_labels=False, output_path='testset.h5')
+build_hdf5_image_dataset('test.txt', image_shape=(300, 300), mode='file', categorical_labels=False, output_path='testset.h5')
 h5f = h5py.File('testset.h5', 'r')
 X = h5f['X']
 Y = h5f['Y']
