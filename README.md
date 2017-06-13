@@ -72,7 +72,7 @@ If you wish to utilize the HDF5 format loading, you can also download `h5py` pac
 
 Now you can start to run the scripts. You need to change the dataset path to your local setting, and uncomment any dataset building statement if necessary.
 The filename indicates the corresponding experiment. For example, `googlenet.py` is the original experiment we made for the GoogLeNet architecture; `googlenet_exp1.py` is the first round hyperparameter tuning test.
-For more detains and what each experiment does, please refer to our final report.
+For more details and what each experiment does, please refer to our final report.
 
 ## Team
 - Arvind Vepa
