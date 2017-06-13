@@ -1,21 +1,28 @@
 # UCLA CS 249 Final Project
-Intel & MobileODT Cervical Cancer Screening
+Kaggle Competition: [Intel & MobileODT Cervical Cancer Screening](https://www.kaggle.com/c/intel-mobileodt-cervical-cancer-screening)
 
 ## Deployment
-This project is based on TFLearn library and requires GPU instance to run it. We
- will show you how to deploy the enviroment on Amazon Web Service ec2 instance.
+This project is based on TFLearn library and requires GPU instance to run it. We will show you how to deploy the enviroment on Amazon Web Service ec2 instance.
 
 ### EC2 GPU Instance
-For machine image (AMI), we choose "Ubuntu Server 16.04 LTS (HVM)". In this exam
-ple we will use p2.xlarge instance. Next, add at least 60 GB storage for your inst
-ance and follow the AWS instruction to configure and start the instance.
+For machine image (AMI), we choose "Ubuntu Server 16.04 LTS (HVM)". In this example we will use p2.xlarge instance. Next, add at least 60 GB storage for your instance and follow the AWS instruction to configure and start the instance.
 
 ### Installing the CUDA Toolkit and cuDNN
-Please follow the instructions on this [page](http://www.pyimagesearch.com/2016/07/04/how-to-install-cuda-toolkit-and-cudnn-for-deep-learning/).
+Download [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads), choose Linux OS, x86_64 Architecture, and Ubuntu distribution, the version is 16.04. Then follow the [official documentation](http://docs.nvidia.com/cuda/index.html#installation-guides) to install.
+To install cuDNN, a dveloper account is required. You can download after signing up.
+After downloading, you need to add following lines to your `~/.bashrc` file
+```
+# CUDA Toolkit
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
+export PATH=${CUDA_HOME}/bin:${PATH}
+```
+then `source ~/.bashrc`
+One can also follow the instructions on this [page](http://www.pyimagesearch.com/2016/07/04/how-to-install-cuda-toolkit-and-cudnn-for-deep-learning/).
 
 ### Tensorflow Installation
 Tensorflow is the prerequisite to work with TFLearn. Please follow the official documentation to install it. We will show you the steps based on our configurations.
-First, export the binary to install
+First, export the binary path
 ```
 # Ubuntu/Linux 64-bit, GPU enabled, Python 3.5
 # Requires CUDA toolkit 8.0 and CuDNN v5. For other versions, see "Installing from sources" below.
